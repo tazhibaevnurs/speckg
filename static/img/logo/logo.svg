@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 48" role="img" aria-label="SPEC-KG">
+  <rect x="1" y="8" width="32" height="32" fill="none" stroke="#c4a35a" stroke-width="1.4"/>
+  <text x="10" y="32" font-family="Georgia, serif" font-size="20" fill="#c4a35a">S</text>
+  <text x="46" y="33" font-family="Georgia, 'Times New Roman', serif" font-size="22" letter-spacing="4" fill="#f4f1ea">SPEC</text>
+  <text x="148" y="33" font-family="Georgia, 'Times New Roman', serif" font-size="22" letter-spacing="4" fill="#c4a35a">-KG</text>
+</svg>

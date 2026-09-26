@@ -1,0 +1,28 @@
+{% load money %}
+<article class="vehicle-card">
+  <a class="vehicle-card-media" href="{{ vehicle.get_absolute_url }}">
+    {% if vehicle.main_image %}
+      <img src="{{ vehicle.main_image.url }}" alt="{{ vehicle.name }}" width="800" height="500" loading="lazy">
+    {% else %}
+      <div class="media-ph" aria-hidden="true"></div>
+    {% endif %}
+    {% if vehicle.use_placeholder %}
+      <span class="photo-note">фото с площадки появится</span>
+    {% endif %}
+    <span class="chip chip-{{ vehicle.condition }}">{{ vehicle.condition_label }}</span>
+  </a>
+  <div class="vehicle-card-body">
+    <p class="eyebrow">{{ vehicle.brand.name }} · {{ vehicle.category.name }}</p>
+    <h3><a href="{{ vehicle.get_absolute_url }}">{{ vehicle.name }}</a></h3>
+    <p class="specs-line">{{ vehicle.short_specs }}</p>
+    <p class="avail">{{ vehicle.availability_label }}{% if vehicle.year %} · {{ vehicle.year }}{% endif %}</p>
+    <div class="vehicle-card-price">
+      <strong>{{ vehicle.price_usd|usd }}</strong>
+      <button class="link-gold" type="button" data-open-lead data-form-type="vehicle" data-source="{{ vehicle.name }} — расчёт в ₽">Получить расчёт в ₽</button>
+    </div>
+    <div class="vehicle-card-cta">
+      <a class="btn btn-ghost btn-sm" href="{{ contact_telegram_url }}" target="_blank" rel="noopener">{% include "includes/icon_telegram.html" %}Telegram</a>
+      <a class="btn btn-ghost btn-sm" href="{{ whatsapp_url }}" target="_blank" rel="noopener">{% include "includes/icon_whatsapp.html" %}WhatsApp</a>
+    </div>
+  </div>
+</article>

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-hero">
+  <div class="container">
+    <p class="eyebrow">Калькулятор</p>
+    <h1>Ориентировочная разница</h1>
+    {% if result.delta_rub != None %}
+      <p class="price-lg">{{ result.delta_rub }} ₽</p>
+    {% endif %}
+    <p>Наша цена ≈ {{ result.our_price_rub }} ₽ ({{ result.our_price_usd }} $ × {{ result.rate }})</p>
+    <p>Утильсбор РФ, справочно: {{ result.util_fee_rub }} ₽ — уточняется менеджером.</p>
+    <p class="form-note">Это оценка, не коммерческое предложение и не расчёт налогов.</p>
+    <a class="btn btn-gold" href="{% url 'pages:home' %}#calculator">Вернуться к калькулятору</a>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,41 @@
+<section class="calculator" id="calculator" data-calculator>
+  <div class="container calc-layout">
+    <div>
+      <p class="eyebrow">Ориентир, не оферта</p>
+      <h2>{{ calc_title|default:"Оценить разницу" }}</h2>
+      <p class="lede">Сравниваем цену у дилера РФ с нашей ценой в долларах (автоконвертация по курсу-заглушке) и показываем справочный порядок утильсбора РФ. Это оценка, не коммерческое предложение и не расчёт налогов.</p>
+    </div>
+    <form class="calc-form" data-calc-form>
+      <label class="field">
+        <span>Тип техники</span>
+        <select name="type" class="field-input">
+          <option value="tractor">Тягач</option>
+          <option value="dump">Самосвал</option>
+          <option value="chassis">Шасси</option>
+          <option value="other">Другое</option>
+        </select>
+      </label>
+      <label class="field">
+        <span>Цена у дилера РФ, ₽</span>
+        <input class="field-input" name="rf_price" inputmode="numeric" placeholder="например 12 500 000" value="12500000">
+      </label>
+      <label class="field">
+        <span>Цена у нас, $</span>
+        <input class="field-input" name="our_price_usd" inputmode="numeric" placeholder="например 68 500" value="68500">
+        <small class="hint">Курс-заглушка: 1 $ ≈ {{ exchange_usd_rub|floatformat:0 }} ₽. Меняется в настройках сайта.</small>
+      </label>
+      <button class="btn btn-gold" type="submit">Посчитать ориентир</button>
+    </form>
+    <div class="calc-result" data-calc-result hidden>
+      <p class="eyebrow">Ориентировочная разница</p>
+      <p class="calc-delta" data-calc-delta></p>
+      <ul class="calc-lines">
+        <li>Наша цена ≈ <span data-calc-our-rub></span> <small>(из $ по курсу-заглушке)</small></li>
+        <li>Цена у дилера РФ: <span data-calc-rf></span></li>
+        <li>Утильсбор РФ, справочный порядок: <span data-calc-util></span> <small>уточняется менеджером</small></li>
+      </ul>
+      <p class="form-note">Цифры округлены. Не являются расчётом налогов и не гарантируют экономию в вашей ситуации.</p>
+      <button class="btn btn-ghost" type="button" data-open-lead data-form-type="calculator" data-source="Калькулятор выгоды">Запросить точный расчёт</button>
+    </div>
+  </div>
+</section>

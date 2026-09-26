@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% load money %}
+
+{% block content %}
+<section class="page-hero">
+  <div class="container">
+    <p class="eyebrow">Каталог</p>
+    <h1>{{ page_title }}</h1>
+    <p class="lede">FAW — флагман. Также Shacman, Howo, JAC, Dongfeng, спецтехника и любая коммерция под запрос. Цены в USD, расчёт в рублях — по кнопке.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container catalog-layout">
+    <form class="filters" method="get">
+      <p class="filters-title">Фильтры</p>
+      <label class="field">
+        <span>Марка</span>
+        <select class="field-input" name="brand">
+          <option value="">Все</option>
+          {% for b in brands %}
+            <option value="{{ b.slug }}" {% if filters.brand == b.slug %}selected{% endif %}>{{ b.name }}</option>
+          {% endfor %}
+        </select>
+      </label>
+      <label class="field">
+        <span>Тип</span>
+        <select class="field-input" name="type">
+          <option value="">Все</option>
+          {% for c in categories %}
+            <option value="{{ c.slug }}" {% if filters.type == c.slug %}selected{% endif %}>{{ c.name }}</option>
+          {% endfor %}
+        </select>
+      </label>
+      <label class="field">
+        <span>Состояние</span>
+        <select class="field-input" name="condition">
+          <option value="">Новые и б/у</option>
+          <option value="new" {% if filters.condition == "new" %}selected{% endif %}>Новая</option>
+          <option value="used" {% if filters.condition == "used" %}selected{% endif %}>Проверенный б/у</option>
+        </select>
+      </label>
+      <label class="field">
+        <span>Наличие</span>
+        <select class="field-input" name="availability">
+          <option value="">Любое</option>
+          <option value="in_stock" {% if filters.availability == "in_stock" %}selected{% endif %}>В наличии</option>
+          <option value="on_order" {% if filters.availability == "on_order" %}selected{% endif %}>Под заказ</option>
+        </select>
+      </label>
+      <div class="filter-row">
+        <label class="field">
+          <span>Цена от, $</span>
+          <input class="field-input" name="price_min" inputmode="numeric" value="{{ filters.price_min }}">
+        </label>
+        <label class="field">
+          <span>до, $</span>
+          <input class="field-input" name="price_max" inputmode="numeric" value="{{ filters.price_max }}">
+        </label>
+      </div>
+      <button class="btn btn-gold" type="submit">Применить</button>
+      <a class="btn btn-ghost" href="{% url 'catalog:list' %}">Сбросить</a>
+    </form>
+
+    <div>
+      <p class="catalog-count">{{ paginator.count }} позиций</p>
+      <div class="grid-cards">
+        {% for vehicle in vehicles %}
+          {% include "includes/vehicle_card.html" %}
+        {% empty %}
+          <p>По фильтрам ничего не нашли. Снимите ограничения или напишите — подберём под запрос.</p>
+        {% endfor %}
+      </div>
+      {% if is_paginated %}
+        <nav class="pager" aria-label="Страницы">
+          {% if page_obj.has_previous %}
+            <a href="?{% for k,v in filters.items %}{% if k != 'page' and v %}{{ k }}={{ v }}&{% endif %}{% endfor %}page={{ page_obj.previous_page_number }}">Назад</a>
+          {% endif %}
+          <span>{{ page_obj.number }} / {{ paginator.num_pages }}</span>
+          {% if page_obj.has_next %}
+            <a href="?{% for k,v in filters.items %}{% if k != 'page' and v %}{{ k }}={{ v }}&{% endif %}{% endfor %}page={{ page_obj.next_page_number }}">Дальше</a>
+          {% endif %}
+        </nav>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% endblock %}

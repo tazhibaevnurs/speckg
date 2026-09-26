@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+{% load money static %}
+
+{% block content %}
+<section class="hero">
+  <div class="hero-media" aria-hidden="true">
+    <img src="{% static 'img/hero-faw.jpg' %}" alt="" width="1920" height="1200" fetchpriority="high">
+  </div>
+  <div class="hero-glow" aria-hidden="true"></div>
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow">Официальный дилер FAW · Бишкек</p>
+      <h1 class="js-split">Коммерческая техника из Кыргызстана — цена ниже дилерской РФ, машины в наличии.</h1>
+      <p class="lede">Помогаем гражданам и бизнесу РФ и клиентам КР купить FAW и другую коммерцию, оформить на кыргызский учёт и собрать пакет под ключ. Без очереди дилера на 3–6 месяцев.</p>
+      <div class="hero-cta">
+        <a class="btn btn-gold" href="{% url 'catalog:list' %}">Смотреть каталог</a>
+        <button class="btn btn-ghost" type="button" data-open-lead data-form-type="general" data-source="Главная — первый экран">Оставить заявку</button>
+      </div>
+      <ul class="hero-meta">
+        <li>Заявки в мессенджерах 24/7</li>
+        <li>{{ contact_city }}</li>
+        <li>Представительства в РФ нет</li>
+      </ul>
+    </div>
+    <div class="hero-panel">
+      <p class="hero-panel-kicker">Оффер</p>
+      <p class="hero-panel-title">Экономия за счёт оформления в Кыргызстане</p>
+      <p>При эксплуатации на регистрации КР нет российского коммерческого утильсбора, который возникает при постановке на учёт в РФ. Цена сделки — ниже типичного дилерского прайса РФ. Точная схема — под вас.</p>
+      <a class="link-gold" href="{% url 'pages:why_kg' %}">Почему Кыргызстан</a>
+    </div>
+  </div>
+</section>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span>FAW J7</span><span>Jiefang JH6</span><span>JK6</span><span>HanV</span><span>Tiger</span><span>Howo</span><span>Shacman</span><span>Бишкек</span><span>Официальный дилер</span>
+    <span>FAW J7</span><span>Jiefang JH6</span><span>JK6</span><span>HanV</span><span>Tiger</span><span>Howo</span><span>Shacman</span><span>Бишкек</span><span>Официальный дилер</span>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <p class="eyebrow">Четыре опоры</p>
+    <h2>Почему к нам едут за техникой</h2>
+    <div class="grid-4">
+      <article class="advantage">
+        <span class="num">01</span>
+        <h3>Цена ниже дилерской РФ</h3>
+        <p>Локальная экономика КР: другой НДС, другие пошлины на китайскую технику, короче плечо Китай — Бишкек.</p>
+      </article>
+      <article class="advantage">
+        <span class="num">02</span>
+        <h3>Оформление в Кыргызстане</h3>
+        <p>Кыргызские номера и учёт КР. Российский коммерческий утильсбор не возникает, пока ТС не ставят на учёт в России.</p>
+      </article>
+      <article class="advantage">
+        <span class="num">03</span>
+        <h3>Техника в наличии</h3>
+        <p>Без очереди 3–6 месяцев у дилера РФ. Новые FAW и проверенный б/у — на площадке или коротким заказом.</p>
+      </article>
+      <article class="advantage">
+        <span class="num">04</span>
+        <h3>Официальный FAW</h3>
+        <p>Заводская гарантия, запчасти и сервис. Не серый импорт. Пакет под ключ: от договора до доставки.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container faw-teaser">
+    <div>
+      <p class="eyebrow">China FAW Group · Чанчунь</p>
+      <h2>FAW Jiefang — флагман каталога</h2>
+      <p class="lede">Первый автозавод Китая, 1953 год. Коммерческая линейка Jiefang: J6, JH6, JK6, J7, HanV, Tiger. SPEC-KG — официальный дилер в Кыргызстане. Техника под реалии СНГ, сервисная поддержка, не «серый» канал.</p>
+      <a class="btn btn-gold" href="{% url 'pages:faw' %}">О бренде FAW</a>
+      <a class="btn btn-ghost" href="{% url 'catalog:list' %}?brand=faw">Каталог FAW</a>
+    </div>
+    <ul class="lineup">
+      <li>J6</li><li>JH6</li><li>JK6</li><li>J7</li><li>HanV</li><li>Tiger</li>
+    </ul>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Площадка</p>
+        <h2>Техника в работе</h2>
+      </div>
+      <a class="link-gold" href="{% url 'catalog:list' %}">Весь каталог</a>
+    </div>
+    <div class="grid-cards">
+      {% for vehicle in vehicles %}
+        {% include "includes/vehicle_card.html" %}
+      {% empty %}
+        <p>Каталог наполняется. Оставьте заявку — подберём под задачу.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <p class="eyebrow">Под ключ</p>
+    <h2>От подбора до номеров и доставки</h2>
+    <ol class="steps">
+      <li><strong>Подбор</strong><span>Новая и проверенный б/у, FAW и другие марки, надстройки на шасси.</span></li>
+      <li><strong>Договор и оплата</strong><span>Прозрачный ДКП. Оплата вне сайта, без эквайринга.</span></li>
+      <li><strong>Учёт КР</strong><span>Регистрация и кыргызские номера. Страховка в комплекте пакета.</span></li>
+      <li><strong>Выдача</strong><span>Самовывоз в Бишкеке или доставка в РФ. Юрлицо / перевозчик в КР — по запросу.</span></li>
+    </ol>
+    <p class="fine">Лизинг и рассрочка — через партнёра, по запросу, не как готовый продукт.</p>
+    <a class="btn btn-ghost" href="{% url 'pages:services' %}">Все услуги</a>
+  </div>
+</section>
+
+{% include "includes/calculator.html" %}
+
+<section class="section trust">
+  <div class="container trust-grid">
+    <div>
+      <p class="eyebrow">Доверие</p>
+      <h2>Работаем открыто, без чужих реквизитов и выдуманных отзывов</h2>
+      <p>Офис и склад — в Бишкеке. Дилерский сертификат FAW и сканы документов появятся в разделе «Документы». Пока — честная заглушка, без чужих лицензий.</p>
+      <a class="link-gold" href="{% url 'pages:documents' %}">Документы</a>
+    </div>
+    <ul class="trust-list">
+      <li>Три схемы: покупка на себя в КР · техника на компании КР · лизинг / рассрочка через партнёра</li>
+      <li>Клиенты: физлица РФ, ИП, ООО и транспортные компании, клиенты КР</li>
+      <li>Надстройки: самосвал, реф, автовоз, цистерна, КМУ</li>
+    </ul>
+  </div>
+</section>
+
+{% include "includes/lead_section.html" with title="Получить предложение" form_type="general" source="Главная — форма" %}
+{% endblock %}

@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if meta_title %}{{ meta_title }}{% else %}SPEC-KG — коммерческая техника из Кыргызстана{% endif %}</title>
+  <meta name="description" content="{% if meta_description %}{{ meta_description }}{% else %}Официальный дилер FAW в Бишкеке. Коммерческая и спецтехника с оформлением в КР.{% endif %}">
+  <meta name="robots" content="index, follow">
+  <meta name="geo.region" content="KG">
+  <meta name="geo.placename" content="Bishkek">
+  <link rel="canonical" href="{{ site_url }}{{ request.path }}">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:site_name" content="SPEC-KG">
+  <meta property="og:title" content="{% if meta_title %}{{ meta_title }}{% else %}SPEC-KG{% endif %}">
+  <meta property="og:description" content="{% if meta_description %}{{ meta_description }}{% else %}Коммерческая техника из Бишкека для РФ и СНГ.{% endif %}">
+  <meta property="og:url" content="{{ site_url }}{{ request.path }}">
+  <meta property="og:image" content="{{ site_url }}{% static 'img/og/og-cover.svg' %}">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="{% static 'img/logo/favicon.svg' %}" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Unbounded:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+  <script>
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      document.documentElement.classList.add("motion");
+    }
+  </script>
+</head>
+<body>
+  <div class="scroll-progress" aria-hidden="true"></div>
+  <div class="page-veil" aria-hidden="true"></div>
+  <a class="skip-link" href="#content">К содержанию</a>
+  {% include "includes/header.html" %}
+  <main id="content">
+    {% if messages %}
+      <div class="flash-stack" role="status">
+        {% for message in messages %}
+          <div class="flash flash-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+    {% block content %}{% endblock %}
+  </main>
+  {% include "includes/footer.html" %}
+  {% include "includes/lead_modal.html" %}
+  <script>
+    window.SPEC = {
+      usdRub: {{ exchange_usd_rub }},
+      utilFee: {{ util_fee_json|safe }},
+      telegram: "{{ contact_telegram_url }}",
+      whatsapp: "{{ whatsapp_url }}",
+      leadUrl: "{% url 'leads:submit' %}"
+    };
+  </script>
+  <script src="{% static 'js/main.js' %}" defer></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+{% load nav %}
+<header class="site-header" id="top">
+  <div class="header-inner">
+    <a class="logo" href="{% url 'pages:home' %}" aria-label="SPEC-KG — на главную">
+      <span class="logo-mark" aria-hidden="true">S</span>
+      <span class="logo-text">SPEC<span>-KG</span></span>
+    </a>
+    <nav class="nav-desktop" aria-label="Основное меню">
+      <a class="{% nav_active 'catalog:list' %}" href="{% url 'catalog:list' %}">Каталог</a>
+      <a class="{% nav_active 'pages:faw' %}" href="{% url 'pages:faw' %}">FAW</a>
+      <a class="{% nav_active 'pages:why_kg' %}" href="{% url 'pages:why_kg' %}">Почему Кыргызстан</a>
+      <a class="{% nav_active 'pages:services' %}" href="{% url 'pages:services' %}">Услуги</a>
+      <a class="{% nav_active 'pages:about' %}" href="{% url 'pages:about' %}">О компании</a>
+      <a class="{% nav_active 'pages:faq' %}" href="{% url 'pages:faq' %}">FAQ</a>
+      <a class="{% nav_active 'pages:contacts' %}" href="{% url 'pages:contacts' %}">Контакты</a>
+    </nav>
+    <div class="header-actions">
+      <a class="btn btn-ghost btn-sm" href="{{ contact_telegram_url }}" target="_blank" rel="noopener">{% include "includes/icon_telegram.html" %}Telegram</a>
+      <a class="btn btn-ghost btn-sm" href="{{ whatsapp_url }}" target="_blank" rel="noopener">{% include "includes/icon_whatsapp.html" %}WhatsApp</a>
+      <button class="btn btn-gold btn-sm" type="button" data-open-lead data-form-type="callback" data-source="Шапка — расчёт">Получить расчёт</button>
+      <button class="menu-btn" type="button" aria-label="Открыть меню" aria-expanded="false" data-nav-toggle>Меню</button>
+    </div>
+  </div>
+  <div class="nav-mobile" data-nav-mobile hidden>
+    <a href="{% url 'catalog:list' %}">Каталог</a>
+    <a href="{% url 'pages:faw' %}">FAW</a>
+    <a href="{% url 'pages:why_kg' %}">Почему Кыргызстан</a>
+    <a href="{% url 'pages:services' %}">Услуги</a>
+    <a href="{% url 'pages:about' %}">О компании</a>
+    <a href="{% url 'pages:documents' %}">Документы</a>
+    <a href="{% url 'pages:faq' %}">FAQ</a>
+    <a href="{% url 'pages:contacts' %}">Контакты</a>
+    <div class="nav-mobile-cta">
+      <a class="btn btn-gold" href="{% url 'catalog:list' %}">Смотреть технику</a>
+      <a class="btn btn-ghost" href="{{ contact_telegram_url }}" target="_blank" rel="noopener">{% include "includes/icon_telegram.html" %}Telegram</a>
+      <a class="btn btn-ghost" href="{{ whatsapp_url }}" target="_blank" rel="noopener">{% include "includes/icon_whatsapp.html" %}WhatsApp</a>
+    </div>
+  </div>
+</header>

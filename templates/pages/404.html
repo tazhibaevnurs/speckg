@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-hero">
+  <div class="container">
+    <p class="eyebrow">404</p>
+    <h1>Такой страницы нет</h1>
+    <p class="lede">Вернитесь в каталог или на главную — техника на месте.</p>
+    <a class="btn btn-gold" href="{% url 'pages:home' %}">На главную</a>
+    <a class="btn btn-ghost" href="{% url 'catalog:list' %}">Каталог</a>
+  </div>
+</section>
+{% endblock %}

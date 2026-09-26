@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-hero">
+  <div class="container">
+    <p class="eyebrow">FAQ</p>
+    <h1>Коротко о главном</h1>
+    <p class="lede">Информационные ответы. Это не юридическая консультация и не обещание результата в вашей ситуации.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container faq-list">
+    {% for item in faqs %}
+      <details class="faq-item"{% if forloop.first %} open{% endif %}>
+        <summary>{{ item.question }}</summary>
+        <p>{{ item.answer }}</p>
+      </details>
+    {% empty %}
+      <p>Вопросы появятся после наполнения.</p>
+    {% endfor %}
+    <p class="form-note">{{ legal_disclaimer }}</p>
+  </div>
+</section>
+
+{% include "includes/lead_section.html" with title="Свой вопрос" form_type="general" source="FAQ" %}
+{% endblock %}

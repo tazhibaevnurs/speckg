@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% load money lead_tags %}
+
+{% block content %}
+<article class="vehicle-page">
+  <div class="container vehicle-layout">
+    <div>
+      <div class="gallery" data-gallery>
+        <div class="gallery-main">
+          {% if vehicle.main_image %}
+            <img src="{{ vehicle.main_image.url }}" alt="{{ vehicle.name }}" data-gallery-main>
+          {% else %}
+            <div class="media-ph"></div>
+          {% endif %}
+          {% if vehicle.use_placeholder %}
+            <span class="photo-note">фото с площадки появится</span>
+          {% endif %}
+        </div>
+        {% if vehicle.images.all %}
+          <div class="gallery-thumbs">
+            {% if vehicle.main_image %}
+              <button type="button" data-thumb="{{ vehicle.main_image.url }}"><img src="{{ vehicle.main_image.url }}" alt=""></button>
+            {% endif %}
+            {% for img in vehicle.images.all %}
+              <button type="button" data-thumb="{{ img.image.url }}"><img src="{{ img.image.url }}" alt="{{ img.caption }}"></button>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+    <div class="vehicle-info">
+      <p class="eyebrow">{{ vehicle.brand.name }} · {{ vehicle.category.name }}</p>
+      <h1>{{ vehicle.name }}</h1>
+      <p class="specs-line">{{ vehicle.short_specs }}</p>
+      <p class="price-lg">{{ vehicle.price_usd|usd }}</p>
+      <button class="link-gold" type="button" data-open-lead data-form-type="vehicle" data-source="{{ vehicle.name }} — расчёт в ₽">Получить расчёт в ₽</button>
+      <p class="avail">{{ vehicle.condition_label }} · {{ vehicle.availability_label }}{% if vehicle.year %} · {{ vehicle.year }}{% endif %}</p>
+      <div class="cta-row">
+        <button class="btn btn-gold" type="button" data-scroll="#request-vehicle">Запросить эту машину</button>
+        <a class="btn btn-ghost" href="{{ contact_telegram_url }}" target="_blank" rel="noopener">{% include "includes/icon_telegram.html" %}Telegram</a>
+        <a class="btn btn-ghost" href="{{ whatsapp_url }}" target="_blank" rel="noopener">{% include "includes/icon_whatsapp.html" %}WhatsApp</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <h2>Характеристики</h2>
+    <dl class="specs-table">
+      {% if vehicle.year %}<div><dt>Год</dt><dd>{{ vehicle.year }}</dd></div>{% endif %}
+      <div><dt>Пробег</dt><dd>{{ vehicle.mileage_display }}</dd></div>
+      {% if vehicle.power_hp %}<div><dt>Мощность</dt><dd>{{ vehicle.power_hp }} л.с.</dd></div>{% endif %}
+      {% if vehicle.wheel_formula %}<div><dt>Колёсная формула</dt><dd>{{ vehicle.wheel_formula }}</dd></div>{% endif %}
+      {% if vehicle.payload %}<div><dt>Нагрузка</dt><dd>{{ vehicle.payload }}</dd></div>{% endif %}
+      {% if vehicle.engine %}<div><dt>Двигатель</dt><dd>{{ vehicle.engine }}</dd></div>{% endif %}
+      {% if vehicle.gearbox %}<div><dt>КПП</dt><dd>{{ vehicle.gearbox }}</dd></div>{% endif %}
+      {% if vehicle.fuel %}<div><dt>Топливо</dt><dd>{{ vehicle.fuel }}</dd></div>{% endif %}
+      {% if vehicle.gvw %}<div><dt>Полная масса</dt><dd>{{ vehicle.gvw }}</dd></div>{% endif %}
+    </dl>
+    {% if vehicle.description %}
+      <div class="prose">
+        <h2>Описание</h2>
+        <p>{{ vehicle.description }}</p>
+        {% if vehicle.extra_features %}<p>{{ vehicle.extra_features }}</p>{% endif %}
+      </div>
+    {% endif %}
+  </div>
+</article>
+
+<section class="section" id="request-vehicle">
+  <div class="container form-layout">
+    <div>
+      <p class="eyebrow">Эта машина</p>
+      <h2>Запросить {{ vehicle.name }}</h2>
+      <p class="lede">Напишите город выдачи и удобный мессенджер. Подтвердим наличие и соберём расчёт в рублях.</p>
+    </div>
+    {% lead_form form_type="vehicle" vehicle=vehicle submit="Запросить эту машину" %}
+  </div>
+</section>
+
+{% if similar %}
+<section class="section section-alt">
+  <div class="container">
+    <h2>Похожая техника</h2>
+    <div class="grid-cards">
+      {% for vehicle in similar %}
+        {% include "includes/vehicle_card.html" %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+{% endblock %}

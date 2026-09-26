@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-hero">
+  <div class="container">
+    <p class="eyebrow">China FAW Group · First Automobile Works</p>
+    <h1>FAW: первый автозавод Китая — официально в Бишкеке</h1>
+    <p class="lede">Госхолдинг КНР, Чанчунь. Коммерческий бренд — FAW Jiefang. SPEC-KG поставляет технику под СНГ как официальный дилер: гарантия, запчасти, сервис, не серый импорт.</p>
+    <a class="btn btn-gold" href="{% url 'catalog:list' %}?brand=faw">Каталог FAW</a>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container prose-wide">
+    <h2>История, которую стоит знать</h2>
+    <div class="timeline">
+      <article>
+        <span>1953</span>
+        <p>Основание FAW в Чанчуне — первый автомобильный завод Китайской Народной Республики.</p>
+      </article>
+      <article>
+        <span>13.07.1956</span>
+        <p>Первый грузовик CA10 «Цзефан» (Jiefang). С этого имени растёт коммерческая линейка, которая едет по Евразии до сих пор.</p>
+      </article>
+      <article>
+        <span>Сегодня</span>
+        <p>Jiefang — тягачи, самосвалы, шасси, фургоны, автовозы и спецнадстройки. Надёжность парка и сервисная сеть — смысл выбора FAW для перевозчика.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <p class="eyebrow">Линейки Jiefang</p>
+    <h2>Что возим под задачи СНГ</h2>
+    <div class="grid-4 lineup-cards">
+      <article class="advantage"><h3>J6</h3><p>Рабочая классика: шасси и самосвалы, понятный сервис, массовый парк.</p></article>
+      <article class="advantage"><h3>JH6</h3><p>Тяжёлая коммерция: магистраль и карьер, баланс цены и ресурса.</p></article>
+      <article class="advantage"><h3>JK6</h3><p>Средний тоннаж: фургоны, рефы, городская и межгородская развозка.</p></article>
+      <article class="advantage"><h3>J7</h3><p>Флагман тягачей: кабина, комфорт экипажа, длинное плечо.</p></article>
+      <article class="advantage"><h3>HanV</h3><p>Современная линейка под эффективность и обновлённый комфорт.</p></article>
+      <article class="advantage"><h3>Tiger</h3><p>Лёгкая и средняя коммерция, короткие плечи, универсальные шасси.</p></article>
+    </div>
+    <p class="fine">Типы: тягачи, самосвалы, шасси, фургоны, автовозы, спецнадстройки — подбираем комплектацию, а не «что осталось на стоянке».</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container split">
+    <div>
+      <h2>Почему официальный дилер</h2>
+      <p>Серый канал экономит на бумаге и теряет на гарантии. Через SPEC-KG вы получаете заводскую гарантию, запчасти и сервисную поддержку. Логистика Китай → Бишкек короче прямого завоза вглубь РФ. Техника готовится под климат и реалии СНГ.</p>
+      <p>Дилерский сертификат — в <a href="{% url 'pages:documents' %}">галерее документов</a>. Пока стоит заглушка «документ будет загружен»: не подставляем чужие сканы.</p>
+    </div>
+    <aside class="aside-card">
+      <p class="eyebrow">SPEC-KG</p>
+      <p>Официальный дилер FAW в Кыргызстане. Офис и склад — Бишкек. Представительства в РФ нет.</p>
+    </aside>
+  </div>
+</section>
+
+{% if faw_vehicles %}
+<section class="section section-alt">
+  <div class="container">
+    <h2>FAW в каталоге</h2>
+    <div class="grid-cards">
+      {% for vehicle in faw_vehicles %}
+        {% include "includes/vehicle_card.html" %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% include "includes/lead_section.html" with title="Запросить FAW" form_type="general" source="Страница FAW" %}
+{% endblock %}

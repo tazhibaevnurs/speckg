@@ -1,0 +1,33 @@
+<form class="lead-form{% if compact %} is-compact{% endif %}" method="post" action="{% url 'leads:submit' %}" data-lead-form>
+  {% csrf_token %}
+  <input type="hidden" name="next" value="{{ next }}">
+  <input type="hidden" name="page_url" value="{{ request.get_full_path }}">
+  <input type="hidden" name="form_type" value="{{ form_type }}">
+  <input type="hidden" name="source" value="{{ source }}">
+  <input type="hidden" name="extra_json" value="" data-extra-json>
+  {# honeypot #}
+  <div class="hp" aria-hidden="true">
+    <label>Сайт <input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+  </div>
+  {% if title %}<h3 class="form-title">{{ title }}</h3>{% endif %}
+  <label class="field">
+    <span>Имя</span>
+    {{ form.name }}
+  </label>
+  <label class="field">
+    <span>Телефон</span>
+    {{ form.phone }}
+  </label>
+  <label class="field">
+    <span>Telegram</span>
+    {{ form.telegram }}
+  </label>
+  {% if not compact %}
+  <label class="field field-full">
+    <span>Комментарий</span>
+    {{ form.comment }}
+  </label>
+  {% endif %}
+  <button class="btn btn-gold field-full" type="submit">{{ submit_label }}</button>
+  <p class="form-note">Нажимая кнопку, вы соглашаетесь с <a href="{% url 'pages:privacy' %}">политикой конфиденциальности</a>.</p>
+</form>

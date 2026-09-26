@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load lead_tags %}
+
+{% block content %}
+<section class="page-hero">
+  <div class="container">
+    <p class="eyebrow">Контакты</p>
+    <h1>Бишкек, Кыргызстан</h1>
+    <p class="lede">Офис и склад в столице. Точный адрес улицы на сайте не публикуем. Представительства в РФ нет — приезжаете к нам или работаем удалённо до выдачи.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container contacts-layout">
+    <div>
+      <p class="eyebrow">Связь</p>
+      <h2>Напишите или позвоните</h2>
+      <ul class="contact-cards">
+        <li>
+          <span>Мессенджеры 24/7</span>
+          <a class="msg-link" href="{{ contact_telegram_url }}" target="_blank" rel="noopener">{% include "includes/icon_telegram.html" %}Telegram {{ contact_telegram }}</a>
+          <a class="msg-link" href="{{ whatsapp_url }}" target="_blank" rel="noopener">{% include "includes/icon_whatsapp.html" %}WhatsApp</a>
+        </li>
+        <li>
+          <span>Телефон</span>
+          <a href="tel:{{ contact_phone_tel }}">{{ contact_phone }}</a>
+        </li>
+        <li>
+          <span>Почта</span>
+          <a href="mailto:{{ contact_email }}">{{ contact_email }}</a>
+        </li>
+        <li>
+          <span>Город</span>
+          <strong>{{ contact_city }}</strong>
+          <p>Офис и склад. Представительства в РФ нет.</p>
+        </li>
+      </ul>
+    </div>
+    <div>
+      <p class="eyebrow">Заявка</p>
+      <h2>Заказать звонок</h2>
+      {% lead_form form_type="callback" source="Контакты — звонок" submit="Заказать звонок" %}
+    </div>
+  </div>
+</section>
+
+<section class="map-section" aria-label="Карта Бишкека">
+  <iframe
+    title="Бишкек на карте — без точной точки офиса"
+    src="https://www.openstreetmap.org/export/embed.html?bbox=74.48%2C42.82%2C74.72%2C42.95&amp;layer=mapnik"
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade"></iframe>
+  <p class="map-caption">Обзор города, не метка склада.</p>
+</section>
+{% endblock %}

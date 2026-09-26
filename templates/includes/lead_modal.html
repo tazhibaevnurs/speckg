@@ -1,0 +1,11 @@
+<div class="modal" id="lead-modal" hidden data-lead-modal>
+  <div class="modal-backdrop" data-close-lead></div>
+  <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="lead-modal-title">
+    <button class="modal-close" type="button" data-close-lead aria-label="Закрыть">×</button>
+    <p class="eyebrow">SPEC-KG</p>
+    <h2 id="lead-modal-title">Оставить заявку</h2>
+    <p class="lede">Перезвоним или напишем в мессенджер. Обычно в тот же день.</p>
+    {% load lead_tags %}
+    {% lead_form form_type="general" source="Модальное окно" submit="Отправить" compact=False %}
+  </div>
+</div>

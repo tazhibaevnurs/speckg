@@ -1,0 +1,46 @@
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <a class="logo" href="{% url 'pages:home' %}">
+        <span class="logo-mark" aria-hidden="true">S</span>
+        <span class="logo-text">SPEC<span>-KG</span></span>
+      </a>
+      <p>Коммерческая и спецтехника из Бишкека. Официальный дилер FAW. Пакет под ключ для клиентов РФ и КР.</p>
+      <p class="footer-city">{{ contact_city }} · Представительства в РФ нет</p>
+    </div>
+    <div>
+      <h2 class="footer-heading">Разделы</h2>
+      <ul class="footer-links">
+        <li><a href="{% url 'catalog:list' %}">Каталог</a></li>
+        <li><a href="{% url 'pages:faw' %}">FAW</a></li>
+        <li><a href="{% url 'pages:why_kg' %}">Почему Кыргызстан</a></li>
+        <li><a href="{% url 'pages:services' %}">Услуги</a></li>
+        <li><a href="{% url 'pages:about' %}">О компании</a></li>
+        <li><a href="{% url 'pages:documents' %}">Документы</a></li>
+        <li><a href="{% url 'pages:faq' %}">FAQ</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2 class="footer-heading">Контакты</h2>
+      <ul class="footer-links">
+        <li><a href="tel:{{ contact_phone_tel }}">{{ contact_phone }}</a></li>
+        <li><a class="msg-link" href="{{ contact_telegram_url }}" target="_blank" rel="noopener">{% include "includes/icon_telegram.html" %}Telegram {{ contact_telegram }}</a></li>
+        <li><a class="msg-link" href="{{ whatsapp_url }}" target="_blank" rel="noopener">{% include "includes/icon_whatsapp.html" %}WhatsApp</a></li>
+        <li><a href="mailto:{{ contact_email }}">{{ contact_email }}</a></li>
+        <li>Заявки в мессенджерах — ежедневно 24/7</li>
+      </ul>
+    </div>
+    <div>
+      <h2 class="footer-heading">Заявка</h2>
+      <p class="footer-note">Онлайн-оплаты нет. Договор и расчёт — с менеджером.</p>
+      <button class="btn btn-gold" type="button" data-open-lead data-form-type="general" data-source="Подвал">Оставить заявку</button>
+    </div>
+  </div>
+  <div class="container footer-legal">
+    <p>{{ legal_disclaimer }}</p>
+    <p class="footer-meta">
+      <a href="{% url 'pages:privacy' %}">Политика конфиденциальности</a>
+      <span>© {% now "Y" %} SPEC-KG</span>
+    </p>
+  </div>
+</footer>

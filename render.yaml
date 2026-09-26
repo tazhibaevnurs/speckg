@@ -1,0 +1,34 @@
+# SPEC-KG — Render Blueprint
+# Подключите репозиторий на https://dashboard.render.com и примените этот файл.
+# Бесплатный веб засыпает после простоя; база Neon/Supabase живёт отдельно (см. README).
+
+services:
+  - type: web
+    name: spec-kg
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt && python manage.py collectstatic --noinput
+    startCommand: bash start.sh
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.12.8"
+      - key: DJANGO_DEBUG
+        value: "False"
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
+      - key: DATABASE_URL
+        sync: false
+      - key: CONTACT_PHONE
+        value: "+996 506 055 056"
+      - key: CONTACT_PHONE_TEL
+        value: "+996506055056"
+      - key: CONTACT_WHATSAPP
+        value: "+996506055056"
+      - key: CONTACT_TELEGRAM
+        value: "@tazhibaevn"
+      - key: CONTACT_TELEGRAM_URL
+        value: "https://t.me/tazhibaevn"
+      - key: CONTACT_EMAIL
+        value: "info@spec-kg.com"
+      - key: CONTACT_CITY
+        value: "Бишкек, Кыргызстан"

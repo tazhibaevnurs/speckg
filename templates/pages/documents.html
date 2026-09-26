@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-hero">
+  <div class="container">
+    <p class="eyebrow">Документы</p>
+    <h1>Сканы появятся здесь</h1>
+    <p class="lede">Не публикуем чужие реквизиты и не рисуем лицензии. Когда файлы будут готовы, владелец загрузит их в админке. Подпись на заглушках одна: документы будут загружены.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="docs-grid">
+      {% for doc in documents %}
+        <article class="doc-card">
+          <div class="doc-preview" aria-hidden="true">
+            <span>SPEC-KG</span>
+          </div>
+          <h2>{{ doc.title }}</h2>
+          <p>{{ doc.description }}</p>
+          {% if doc.file %}
+            <a class="link-gold" href="{{ doc.file.url }}" target="_blank" rel="noopener">Открыть файл</a>
+          {% else %}
+            <p class="photo-note static">документ будет загружен</p>
+          {% endif %}
+        </article>
+      {% empty %}
+        <p>Раздел готовится.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

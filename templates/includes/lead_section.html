@@ -1,0 +1,15 @@
+{% load lead_tags %}
+<section class="section form-section" id="lead">
+  <div class="container form-layout">
+    <div>
+      <p class="eyebrow">Заявка</p>
+      <h2>{{ title|default:"Оставить заявку" }}</h2>
+      <p class="lede">Имя и телефон — остальное можно дописать в комментарии. Ответим в Telegram или WhatsApp. Онлайн-оплаты на сайте нет.</p>
+      <div class="contact-pills">
+        <a href="{{ contact_telegram_url }}" target="_blank" rel="noopener">{% include "includes/icon_telegram.html" %}Telegram</a>
+        <a href="{{ whatsapp_url }}" target="_blank" rel="noopener">{% include "includes/icon_whatsapp.html" %}WhatsApp</a>
+      </div>
+    </div>
+    {% lead_form form_type=form_type|default:"general" source=source|default:"Форма на странице" submit=submit|default:"Отправить заявку" %}
+  </div>
+</section>

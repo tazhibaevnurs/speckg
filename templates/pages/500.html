@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-hero">
+  <div class="container">
+    <p class="eyebrow">500</p>
+    <h1>Сервер споткнулся</h1>
+    <p class="lede">Попробуйте обновить страницу или напишите в Telegram — заявка через мессенджер дойдёт.</p>
+    <a class="btn btn-gold" href="{{ contact_telegram_url }}">{% include "includes/icon_telegram.html" %}Telegram</a>
+  </div>
+</section>
+{% endblock %}

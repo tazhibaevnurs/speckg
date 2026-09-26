@@ -1,0 +1,14 @@
+.venv
+venv
+__pycache__
+*.pyc
+.git
+.env
+db.sqlite3
+staticfiles
+media/vehicles/*
+media/documents/*
+!media/vehicles/.gitkeep
+!media/documents/.gitkeep
+.DS_Store
+postgres-data
