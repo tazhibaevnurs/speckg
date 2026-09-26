@@ -131,9 +131,17 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 DATABASE_URL = os.getenv("DATABASE_URL", "").strip()
 if DATABASE_URL:
+    # Supabase transaction pooler (port 6543) cannot keep persistent connections
+    _is_pooler = ":6543" in DATABASE_URL or "pooler.supabase.com" in DATABASE_URL
     DATABASES = {
-        "default": dj_database_url.parse(DATABASE_URL, conn_max_age=600)
+        "default": dj_database_url.parse(
+            DATABASE_URL,
+            conn_max_age=0 if _is_pooler else 600,
+            ssl_require="supabase.com" in DATABASE_URL,
+        )
     }
+    if _is_pooler:
+        DATABASES["default"]["DISABLE_SERVER_SIDE_CURSORS"] = True
 else:
     DATABASES = {
         "default": {
